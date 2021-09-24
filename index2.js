@@ -1,116 +1,155 @@
-let totalFinalPrice = 0;
 
-function getMemory(memoryCost){
-    if(memoryCost){
-        let memoryButton = document.getElementById('memory-cost');
+// Memory Part
+
+
+function getMemory(memoryCost) {
+    if (memoryCost) {
+        const memoryButton = document.getElementById('memory-cost');
         memoryButton.innerText = 0;
-    }else{
-        let memoryButton = document.getElementById('memory-cost');
+
+
+    } else {
+        const memoryButton = document.getElementById('memory-cost');
         memoryButton.innerText = 180;
+
     }
 
-totalFinalPrice = totalFinalPrice + parseInt(document.getElementById('memory-cost').value);
+    calculation()
 
-const totalPrice = document.getElementById('total-price');
-totalPrice.innerText = totalFinalPrice; 
-
-
-
-
-
-//     const memoryButton = document.getElementById('memory-cost');  
-//    let totalPrice = document.getElementById('total-price');
-//    const totalAmount =parseInt(totalPrice) + parseInt(memoryButton);
-//    totalPrice.innerText = totalAmount;
-
-   
-    
 }
 
-function getstorage(storageCost){
-    if(storageCost == true){
+
+//storage part
+
+function getstorage(storageCost) {
+    if (storageCost == true) {
         const storageButton = document.getElementById('storage-cost');
-         storageButton.innerText = 0;
-    }else if(storageCost == false){
+        storageButton.innerText = 0;
+    } else if (storageCost == false) {
         const storageButton = document.getElementById('storage-cost');
         storageButton.innerText = 100;
-    }else{
+    } else {
         const storageButton = document.getElementById('storage-cost');
         storageButton.innerText = 180;
     }
-    totalFinalPrice = totalFinalPrice + parseInt(storageButton);
+
+    calculation();
+
 }
 
+//delivery part
 
-function getdelivery(deliveryCost){
-    if(deliveryCost == true){
+
+function getdelivery(deliveryCost) {
+    if (deliveryCost == true) {
         const deliveryButton = document.getElementById('delivery-cost');
-    deliveryButton.innerText = 0;
-    }else{
+        deliveryButton.innerText = 0;
+    } else {
         const deliveryButton = document.getElementById('delivery-cost');
-    deliveryButton.innerText = 20;
+        deliveryButton.innerText = 20;
     }
-    totalFinalPrice = totalFinalPrice + parseInt(deliveryButton);
+    calculation();
 }
 
-// function totalCost(){
-//     let memoryButton = document.getElementById('memory-cost').innerText;
-//     let storageButton = document.getElementById('storage-cost').innerText;
-//     let deliveryButton = document.getElementById('delivery-cost').innerText;
-    
-   
-//   const  totalPrice = parseInt(memoryButton) + parseInt(storageButton) + parseInt(deliveryButton) + 1299;
 
-//    document.getElementById('total-price').innerText=totalPrice;
+//calculation part
 
-       
-// }
+function calculation() {
+    const memoryButton = document.getElementById('memory-cost');
+    const totalMemoryCost = memoryButton.innerText;
+    const totalMemoryCostAmount = parseInt(totalMemoryCost);
 
-document.getElementById('total-price').innerText=totalFinalPrice;
+    const storageButton = document.getElementById('storage-cost');
+    const totalstoragecost = storageButton.innerText;
+    const totalStorageCostAmount = parseInt(totalstoragecost);
+
+    const deliveryButton = document.getElementById('delivery-cost');
+    const totalDeliveryCost = deliveryButton.innerText;
+    const totalDeliveryCostAmount = parseInt(totalDeliveryCost);
+
+    const totalPrice = totalMemoryCostAmount + totalStorageCostAmount + totalDeliveryCostAmount + 1299;
+
+    const totalCost = document.getElementById('total-price');
+    totalCost.innerText = totalPrice;
+
+    const total = document.getElementById('total-amount');
+    total.innerText = totalPrice;
+
+}
 
 
+//memory buttons
 
+document.getElementById('memory-btn1').addEventListener('click', function () {
 
-document.getElementById('memory-btn1').addEventListener('click', function(){
+    getMemory(true);
 
-getMemory(true);
 })
-document.getElementById('memory-btn2').addEventListener('click', function(){
+document.getElementById('memory-btn2').addEventListener('click', function () {
 
-getMemory(false);
+    getMemory(false);
 })
 
+//storage buttons
 
-document.getElementById('storage-btn1').addEventListener('click', function(){
-    
+document.getElementById('storage-btn1').addEventListener('click', function () {
+
 
     getstorage(true)
 
 })
-document.getElementById('storage-btn2').addEventListener('click', function(){
+document.getElementById('storage-btn2').addEventListener('click', function () {
     getstorage(false)
 
 })
-document.getElementById('storage-btn3').addEventListener('click', function(){
+document.getElementById('storage-btn3').addEventListener('click', function () {
 
     getstorage();
 })
 
-
-document.getElementById('delivery-btn1').addEventListener('click', function(){
-   getdelivery(true);
+//delivery buttons
+document.getElementById('delivery-btn1').addEventListener('click', function () {
+    getdelivery(true);
 })
-document.getElementById('delivery-btn2').addEventListener('click', function(){
-    
+document.getElementById('delivery-btn2').addEventListener('click', function () {
+
     getdelivery();
 
-   
+
 })
 
+//pomo code part
+
+
+let promoStatus = true;
+
+ document.getElementById('apply-button').addEventListener('click', function(){
+     const pomoCode = document.getElementById('pomo-area');
+     const code = pomoCode.value;
+
+     if(code == 'stevekaku' && promoStatus){
+
+
+         const total = document.getElementById('total-amount');
+        const finallyTotal = total.innerText;
+        const discount = finallyTotal - (20 * finallyTotal / 100);
+
+        total.innerText = discount;
+
+        pomoCode.value = "";
+
+        promoStatus = false;
+
+
+    }
+})
+
+// End Of JS file
 
 
 
- 
+
+
 
 
 
